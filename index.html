@@ -617,17 +617,48 @@
   }
   .video-grid.visible .video-card:nth-child(1) { opacity:1; transform:scale(1); transition-delay:.05s; }
   .video-grid.visible .video-card:nth-child(2) { opacity:1; transform:scale(1); transition-delay:.2s; }
-  /* Social tiles stagger */
-  .social-post-placeholder {
+  /* Gallery video tiles */
+  .social-video-tile {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--navy);
     opacity: 0;
     transform: scale(.92);
     transition: opacity .4s ease, transform .4s ease;
   }
-  .social-grid.visible .social-post-placeholder:nth-child(1) { opacity:1; transform:scale(1); transition-delay:.0s; }
-  .social-grid.visible .social-post-placeholder:nth-child(2) { opacity:1; transform:scale(1); transition-delay:.08s; }
-  .social-grid.visible .social-post-placeholder:nth-child(3) { opacity:1; transform:scale(1); transition-delay:.16s; }
-  .social-grid.visible .social-post-placeholder:nth-child(4) { opacity:1; transform:scale(1); transition-delay:.24s; }
-  .social-grid.visible .social-post-placeholder:nth-child(5) { opacity:1; transform:scale(1); transition-delay:.32s; }
+  .social-grid.visible .social-video-tile:nth-child(1) { opacity:1; transform:scale(1); transition-delay:.0s; }
+  .social-grid.visible .social-video-tile:nth-child(2) { opacity:1; transform:scale(1); transition-delay:.08s; }
+  .social-grid.visible .social-video-tile:nth-child(3) { opacity:1; transform:scale(1); transition-delay:.16s; }
+  .social-grid.visible .social-video-tile:nth-child(4) { opacity:1; transform:scale(1); transition-delay:.24s; }
+  .social-grid.visible .social-video-tile:nth-child(5) { opacity:1; transform:scale(1); transition-delay:.32s; }
+  .social-video-tile img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .3s ease;
+  }
+  .social-video-tile:hover img { transform: scale(1.05); }
+  .social-video-tile video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .gallery-play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: rgba(2,31,53,.4);
+    color: #fff;
+    transition: background .2s;
+  }
+  .social-video-tile:hover .gallery-play-btn { background: rgba(2,31,53,.6); }
+  .social-video-tile.playing .gallery-play-btn { display: none; }
 
   /* === FOOTER === */
   footer {
@@ -823,30 +854,28 @@
     <div class="annotation">↓ Replace placeholders with actual video URLs from /wp-content/uploads/2024/10/</div>
 
     <div class="video-grid">
-      <!-- Video 1: process/before-after -->
+      <!-- Video 1: main brand reel -->
       <div class="video-card">
-        <video class="video-thumb" poster="" muted loop>
-          <source src="https://www.turnkeybathremodel.com/wp-content/uploads/2024/10/video-1.mp4" type="video/mp4">
+        <video class="video-thumb" poster="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/video-image-800x450.jpg" muted loop playsinline>
+          <source src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/turnkeyrenovators-videos.mp4" type="video/mp4">
         </video>
         <div class="video-play-overlay">
           <div class="play-btn">▶</div>
-          <div class="video-caption">Before &amp; After: 1-Day Tub-to-Shower Conversion</div>
+          <div class="video-caption">See the TurnKey Difference — Before &amp; After</div>
         </div>
-        <div class="video-card-label">New Orleans homeowner — completed in 6 hours</div>
+        <div class="video-card-label">Real Louisiana homeowners. Real results.</div>
       </div>
 
-      <!-- Video 2: testimonial / customer story -->
-      <div class="video-card" style="background:#0a2f4a;">
-        <div style="width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#021f35,#0d4a78);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-          <div style="width:80px;height:80px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;">🛁</div>
-          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">CUSTOMER VIDEO TESTIMONIAL</div>
-          <div style="color:rgba(255,255,255,.4);font-size:12px;">Upload/link client video here</div>
-        </div>
+      <!-- Video 2: mid video / process -->
+      <div class="video-card">
+        <video class="video-thumb" poster="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/video-image2-800x450.jpg" muted loop playsinline>
+          <source src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/mid-video.mp4" type="video/mp4">
+        </video>
         <div class="video-play-overlay">
           <div class="play-btn">▶</div>
-          <div class="video-caption">"They finished our shower in one day — incredible!"</div>
+          <div class="video-caption">Installed in as Little as 1 Day — Here's How</div>
         </div>
-        <div class="video-card-label">★★★★★ Verified Google Review</div>
+        <div class="video-card-label">No mess. No stress. Done and done.</div>
       </div>
     </div>
   </div>
@@ -988,15 +1017,27 @@
       </div>
     </div>
 
-    <div class="annotation">↓ Replace with EmbedSocial, Juicer, or Tagembed Instagram feed widget</div>
-
     <div class="social-grid">
-      <!-- 5 placeholder post tiles -->
-      <div class="social-post-placeholder">Before &amp; After</div>
-      <div class="social-post-placeholder">Shower Install</div>
-      <div class="social-post-placeholder">1-Day Job</div>
-      <div class="social-post-placeholder">Customer Review</div>
-      <div class="social-post-placeholder">New Tile Design</div>
+      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-1.mp4')">
+        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-image-1-400x250.png" alt="TurnKey bathroom remodel project 1" loading="lazy">
+        <div class="gallery-play-btn">▶</div>
+      </div>
+      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-2.mp4')">
+        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-image-2-400x250.png" alt="TurnKey bathroom remodel project 2" loading="lazy">
+        <div class="gallery-play-btn">▶</div>
+      </div>
+      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-3.mp4')">
+        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-3-400x250.png" alt="TurnKey bathroom remodel project 3" loading="lazy">
+        <div class="gallery-play-btn">▶</div>
+      </div>
+      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-4.mp4')">
+        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-image-4-400x250.png" alt="TurnKey bathroom remodel project 4" loading="lazy">
+        <div class="gallery-play-btn">▶</div>
+      </div>
+      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/video-1.mp4')">
+        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/unnamed-800x450.jpg" alt="TurnKey bathroom remodel project 5" loading="lazy">
+        <div class="gallery-play-btn">▶</div>
+      </div>
     </div>
 
   </div>
@@ -1110,6 +1151,24 @@
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('.proof-inner').forEach(el => proofObs.observe(el));
+
+  // --- Gallery tile click-to-play ---
+  function playGalleryVideo(tile, src) {
+    if (tile.classList.contains('playing')) return;
+    tile.classList.add('playing');
+    const img = tile.querySelector('img');
+    const vid = document.createElement('video');
+    vid.src = src;
+    vid.autoplay = true;
+    vid.controls = true;
+    vid.loop = true;
+    vid.playsInline = true;
+    vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;';
+    if (img) img.style.display = 'none';
+    tile.appendChild(vid);
+    vid.play().catch(() => {});
+  }
+  window.playGalleryVideo = playGalleryVideo;
 </script>
 
 </body>
