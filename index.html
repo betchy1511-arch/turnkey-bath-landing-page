@@ -1410,26 +1410,20 @@
   // === STICKY FORM (JS-based — GHL iframe is 1491px so CSS sticky has no scroll range) ===
   (function stickyForm() {
     const formCard = document.getElementById('consultation-form');
-    const hero     = document.querySelector('.hero');
-    const heroLeft = hero ? hero.querySelector('.hero-inner > div:first-child') : null;
-    if (!formCard || !hero || !heroLeft) return;
+    const heroLeft = document.querySelector('.hero-inner > div:first-child');
+    if (!formCard || !heroLeft) return;
 
     let isFixed = false;
-    let capturedRight, capturedWidth, leftColHeight;
+    let capturedRight, capturedWidth;
 
     function capture() {
       const rect    = formCard.getBoundingClientRect();
       capturedRight = window.innerWidth - rect.right;
       capturedWidth = formCard.offsetWidth;
-      // Lock hero to left-column height only — NOT the giant iframe height
-      const cs = getComputedStyle(hero);
-      leftColHeight = heroLeft.offsetHeight
-        + parseInt(cs.paddingTop) + parseInt(cs.paddingBottom);
     }
 
     function fix() {
       if (isFixed) return;
-      hero.style.minHeight = leftColHeight + 'px';
       Object.assign(formCard.style, {
         position : 'fixed',
         top      : '90px',
@@ -1445,14 +1439,14 @@
     function unfix() {
       if (!isFixed) return;
       ['position','top','right','width','maxHeight','overflowY','zIndex'].forEach(p => formCard.style[p] = '');
-      hero.style.minHeight = '';
       isFixed = false;
     }
 
     function update() {
       if (window.innerWidth < 769) { unfix(); return; }
-      const r = hero.getBoundingClientRect();
-      (r.top < 90 && r.bottom > 90) ? fix() : unfix();
+      // Track left column (always in flow) — unfix when it fully exits viewport
+      const r = heroLeft.getBoundingClientRect();
+      (r.top < 90 && r.bottom > 0) ? fix() : unfix();
     }
 
     window.addEventListener('load', function () {
