@@ -288,6 +288,7 @@
     gap: 28px;
     margin-top: 40px;
   }
+  .video-card { cursor: pointer; }
   .video-card {
     border-radius: 12px;
     overflow: hidden;
@@ -856,8 +857,7 @@
     </p>
 
     <div class="video-grid">
-      <!-- Video 1: main brand reel -->
-      <div class="video-card">
+      <div class="video-card" onclick="toggleVideo(this)">
         <video class="video-thumb" poster="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/video-image-800x450.jpg" muted loop playsinline>
           <source src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/turnkeyrenovators-videos.mp4" type="video/mp4">
         </video>
@@ -868,16 +868,37 @@
         <div class="video-card-label">Real Louisiana homeowners. Real results.</div>
       </div>
 
-      <!-- Video 2: bath install -->
-      <div class="video-card">
+      <div class="video-card" onclick="toggleVideo(this)">
         <video class="video-thumb" poster="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/unnamed-800x450.jpg" muted loop playsinline>
           <source src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/video-1.mp4" type="video/mp4">
         </video>
         <div class="video-play-overlay">
           <div class="play-btn">▶</div>
-          <div class="video-caption">Installed in as Little as 1 Day — Here's How</div>
+          <div class="video-caption">Bath Remodel — Installed in 1 Day</div>
         </div>
         <div class="video-card-label">No mess. No stress. Done and done.</div>
+      </div>
+
+      <div class="video-card" onclick="toggleVideo(this)">
+        <video class="video-thumb" muted loop playsinline>
+          <source src="demo-day-cleveland.mov" type="video/mp4">
+        </video>
+        <div class="video-play-overlay">
+          <div class="play-btn">▶</div>
+          <div class="video-caption">Demo Day — Cleveland Project</div>
+        </div>
+        <div class="video-card-label">Watch the transformation begin.</div>
+      </div>
+
+      <div class="video-card" onclick="toggleVideo(this)">
+        <video class="video-thumb" muted loop playsinline>
+          <source src="bathroom-cleveland.mov" type="video/mp4">
+        </video>
+        <div class="video-play-overlay">
+          <div class="play-btn">▶</div>
+          <div class="video-caption">Bathroom Reveal — Cleveland Project</div>
+        </div>
+        <div class="video-card-label">The finished result speaks for itself.</div>
       </div>
     </div>
   </div>
@@ -1076,8 +1097,27 @@
   SCRIPTS: video autoplay + scroll animations
 ══════════════════════════════════════════════════ -->
 <script>
-  // --- Video autoplay ---
-  document.querySelectorAll('video').forEach(v => { v.play().catch(() => {}); });
+  // --- Video autoplay (muted loop background) ---
+  document.querySelectorAll('video').forEach(v => { v.muted = true; v.play().catch(() => {}); });
+
+  // --- Click to unmute + show controls ---
+  function toggleVideo(card) {
+    const vid = card.querySelector('video');
+    const overlay = card.querySelector('.video-play-overlay');
+    if (vid.muted) {
+      // First click: unmute, show controls
+      vid.muted = false;
+      vid.controls = true;
+      overlay.style.display = 'none';
+    } else if (vid.paused) {
+      vid.play();
+      overlay.style.display = 'none';
+    } else {
+      vid.pause();
+      overlay.style.display = 'flex';
+    }
+  }
+  window.toggleVideo = toggleVideo;
 
   // --- Smooth scroll to form ---
   document.querySelectorAll('a[href="#consultation-form"]').forEach(a => {
