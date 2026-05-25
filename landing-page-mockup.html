@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TurnKey Bath Remodel — Free In-Home Consultation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* === RESET === */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Public Sans', sans-serif; color: #021f35; background: #fff; }
+
+  /* === BRAND === */
+  :root {
+    --navy:  #021f35;
+    --blue:  #4d98d2;
+    --blue-dark: #3a7db8;
+    --white: #ffffff;
+    --gray:  #f7f9fb;
+    --star:  #f5a623;
+  }
+
+  /* === NAV BAR (minimal — no distractions) === */
+  .nav-bar {
+    background: var(--navy);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  }
+  .nav-bar img.logo { height: 48px; }
+  .nav-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .nav-phone .phone-icon {
+    background: var(--blue);
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .nav-cta-btn {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .2s;
+  }
+  .nav-cta-btn:hover { background: var(--blue-dark); }
+
+  /* === HERO === */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #0a3554 60%, #0d4a78 100%);
+    padding: 60px 24px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://www.turnkeybathremodel.com/wp-content/uploads/2024/10/video-1.mp4') center/cover;
+    opacity: .08;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(77,152,210,.25);
+    border: 1px solid rgba(77,152,210,.5);
+    color: #a8d4f0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--blue);
+  }
+  .hero-subhead {
+    font-size: 18px;
+    line-height: 1.65;
+    color: rgba(255,255,255,.82);
+    margin-bottom: 28px;
+    max-width: 520px;
+  }
+  .hero-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  .hero-bullets li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.9);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .hero-bullets li .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 12px; flex-shrink: 0;
+  }
+
+  /* === FORM CARD === */
+  .form-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.35);
+  }
+  .form-card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .form-card-sub {
+    font-size: 14px;
+    color: #5a6e82;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .form-row { display: flex; flex-direction: column; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: .4px;
+  }
+  .form-group input,
+  .form-group select {
+    border: 1.5px solid #d0dce8;
+    border-radius: 8px;
+    padding: 13px 16px;
+    font-size: 15px;
+    font-family: 'Public Sans', sans-serif;
+    color: var(--navy);
+    background: #f9fbfd;
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus { border-color: var(--blue); background: #fff; }
+  .form-submit {
+    background: #e8440c;
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 17px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background .2s, transform .1s;
+    letter-spacing: .3px;
+  }
+  .form-submit:hover { background: #c73a0a; transform: translateY(-1px); }
+  .form-disclaimer {
+    font-size: 11.5px;
+    color: #8a9bab;
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+  .form-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .form-stars .stars { color: var(--star); font-size: 18px; letter-spacing: 2px; }
+  .form-stars span { font-size: 13px; color: #5a6e82; font-weight: 500; }
+
+  /* === PROOF BAR === */
+  .proof-bar {
+    background: var(--navy);
+    padding: 32px 24px;
+  }
+  .proof-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .proof-item { text-align: center; }
+  .proof-number {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+  .proof-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,.65);
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin-top: 5px;
+  }
+  .proof-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,.15);
+  }
+
+  /* === SECTION SHELL === */
+  section { padding: 80px 24px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--blue);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .section-sub {
+    font-size: 17px;
+    color: #4a6177;
+    line-height: 1.65;
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+
+  /* === VIDEO SECTION === */
+  .video-section { background: var(--gray); }
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .video-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--navy);
+    box-shadow: 0 8px 32px rgba(2,31,53,.15);
+    position: relative;
+  }
+  .video-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    opacity: .85;
+  }
+  .video-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: rgba(2,31,53,.35);
+  }
+  .play-btn {
+    width: 68px; height: 68px;
+    background: rgba(255,255,255,.95);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    cursor: pointer;
+  }
+  .video-caption {
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 20px;
+    text-shadow: 0 1px 4px rgba(0,0,0,.5);
+  }
+  .video-card-label {
+    padding: 16px 20px;
+    background: var(--navy);
+    color: rgba(255,255,255,.8);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  /* === TESTIMONIALS === */
+  .testimonials-section { background: var(--white); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .testimonial-card {
+    border: 1.5px solid #e0eaf3;
+    border-radius: 12px;
+    padding: 28px 24px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 2px 12px rgba(2,31,53,.06);
+    transition: box-shadow .2s;
+  }
+  .testimonial-card:hover { box-shadow: 0 8px 28px rgba(2,31,53,.12); }
+  .t-stars { color: var(--star); font-size: 17px; letter-spacing: 2px; }
+  .t-quote {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #2d4a60;
+    flex: 1;
+  }
+  .t-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid #edf2f7;
+    padding-top: 14px;
+  }
+  .t-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), #7ab8e8);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .t-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .t-location { font-size: 13px; color: #7a94a8; }
+  .t-source {
+    font-size: 12px;
+    color: #aab8c4;
+    font-weight: 600;
+  }
+
+  /* === SOCIAL FEED === */
+  .social-section { background: var(--gray); }
+  .social-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .social-icon-ig {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 22px;
+  }
+  .social-handle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .social-sub { font-size: 14px; color: #6a849a; }
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .social-post {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--navy);
+    position: relative;
+    cursor: pointer;
+  }
+  .social-post img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .3s;
+  }
+  .social-post:hover img { transform: scale(1.05); }
+  .social-post-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(2,31,53,.5);
+    opacity: 0;
+    transition: opacity .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 22px;
+    gap: 16px;
+  }
+  .social-post:hover .social-post-overlay { opacity: 1; }
+  /* Placeholder posts for mockup */
+  .social-post-placeholder {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background: #d0dce8;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #6a849a;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .social-post-placeholder::before {
+    content: '📷';
+    font-size: 28px;
+  }
+
+  /* === BOTTOM CTA === */
+  .bottom-cta {
+    background: linear-gradient(135deg, var(--navy), #0d4a78);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .bottom-cta h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+  .bottom-cta p {
+    font-size: 18px;
+    color: rgba(255,255,255,.78);
+    margin-bottom: 36px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary-cta {
+    background: #e8440c;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 18px 38px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .btn-primary-cta:hover { background: #c73a0a; }
+  .btn-secondary-cta {
+    background: transparent;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 17px 38px;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,.5);
+    text-decoration: none;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-secondary-cta:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+  /* === TRUST BAR === */
+  .trust-bar {
+    background: var(--white);
+    border-top: 1px solid #e8f0f7;
+    border-bottom: 1px solid #e8f0f7;
+    padding: 24px;
+  }
+  .trust-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .trust-item .check-icon {
+    color: var(--blue);
+    font-size: 18px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: #010e1a;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  footer p {
+    color: rgba(255,255,255,.4);
+    font-size: 13px;
+  }
+  footer a { color: rgba(255,255,255,.6); text-decoration: none; }
+
+  /* === STICKY MOBILE CTA === */
+  .sticky-mobile-cta {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--navy);
+    padding: 14px 20px;
+    z-index: 200;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+    gap: 12px;
+  }
+  .sticky-mobile-cta a {
+    flex: 1;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .mob-call { background: var(--blue); color: #fff; }
+  .mob-form { background: #e8440c; color: #fff; }
+
+  /* === ANNOTATION OVERLAY (mockup only) === */
+  .annotation {
+    display: inline-block;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    margin: 4px 0;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .form-card { max-width: 500px; margin: 0 auto; }
+    .video-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .social-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero h1 { font-size: 32px; }
+    .section-title { font-size: 28px; }
+    .sticky-mobile-cta { display: flex; }
+    body { padding-bottom: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+  NAV (minimal — no links to bleed traffic off-page)
+══════════════════════════════════════════════════ -->
+<nav class="nav-bar">
+  <img src="https://www.turnkeybathremodel.com/wp-content/uploads/2023/12/logo.png"
+       alt="TurnKey Bath Remodel" class="logo">
+  <a href="tel:+15045136366" class="nav-phone">
+    <span class="phone-icon">📞</span>
+    (504) 513-6366
+  </a>
+  <a href="#consultation-form" class="nav-cta-btn">Get Free Quote</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+  HERO + FORM
+══════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+
+    <!-- Left: headline + bullets -->
+    <div>
+      <div class="hero-badge"><span class="dot"></span>New Orleans' #1 Bath Remodeler</div>
+      <h1>Your Dream Bathroom,<br><em>Installed in as Little as 1 Day</em></h1>
+      <p class="hero-subhead">
+        Louisiana homeowners trust TurnKey for stress-free bathroom transformations
+        that fit any budget — with zero mess, zero delays, and a lifetime guarantee.
+      </p>
+      <ul class="hero-bullets">
+        <li><span class="check">✓</span> 1-Day installation available</li>
+        <li><span class="check">✓</span> 100% Lifetime Warranty</li>
+        <li><span class="check">✓</span> Financing options available</li>
+        <li><span class="check">✓</span> Licensed &amp; insured — locally owned</li>
+        <li><span class="check">✓</span> No-pressure, free in-home consultation</li>
+      </ul>
+    </div>
+
+    <!-- Right: lead capture form -->
+    <div class="form-card" id="consultation-form">
+      <div class="form-stars">
+        <span class="stars">★★★★★</span>
+        <span>500+ Five-Star Reviews</span>
+      </div>
+      <div class="form-card-title">Schedule Your FREE Consultation</div>
+      <div class="form-card-sub">Takes 60 seconds. No obligation.</div>
+
+      <div class="annotation">↓ GHL form embeds here — replace this with LeadConnector widget</div>
+
+      <form class="form-row" onsubmit="return false;">
+        <div class="form-group">
+          <label for="fname">Full Name</label>
+          <input type="text" id="fname" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="(504) 555-0100">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="jane@email.com">
+        </div>
+        <div class="form-group">
+          <label for="project">What Do You Need?</label>
+          <select id="project">
+            <option value="">— Select a project type —</option>
+            <option>Tub-to-Shower Conversion</option>
+            <option>Full Shower Replacement</option>
+            <option>Bathtub Replacement</option>
+            <option>Barrier-Free / Walk-In Shower</option>
+            <option>Full Bathroom Remodel</option>
+            <option>Not Sure — Need a Consultation</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">
+          Get My FREE Consultation →
+        </button>
+      </form>
+      <p class="form-disclaimer">
+        🔒 Your info is 100% private. We never sell or share your data.<br>
+        A local TurnKey specialist will call you within 2 business hours.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+  TRUST BAR
+══════════════════════════════════════════════════ -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="check-icon">✓</span> Residential Lic. #890459</div>
+    <div class="trust-item"><span class="check-icon">✓</span> Commercial Lic. #3667</div>
+    <div class="trust-item"><span class="check-icon">✓</span> BBB Accredited</div>
+    <div class="trust-item"><span class="check-icon">✓</span> 100% Satisfaction Guaranteed</div>
+    <div class="trust-item"><span class="check-icon">✓</span> Serving Greater New Orleans</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  PROOF BAR
+══════════════════════════════════════════════════ -->
+<div class="proof-bar">
+  <div class="proof-inner">
+    <div class="proof-item">
+      <span class="proof-number">500+</span>
+      <span class="proof-label">Happy Homeowners</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-number">1 Day</span>
+      <span class="proof-label">Average Install Time</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-number">5★</span>
+      <span class="proof-label">Average Google Rating</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-number">Lifetime</span>
+      <span class="proof-label">Warranty Included</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  VIDEO SECTION
+══════════════════════════════════════════════════ -->
+<section class="video-section">
+  <div class="section-inner">
+    <div class="section-label">See the Work</div>
+    <h2 class="section-title">Real Transformations.<br>Real Louisiana Homeowners.</h2>
+    <p class="section-sub">
+      Watch what TurnKey installs in as little as a single day —
+      no gimmicks, no contractors in your house for weeks.
+    </p>
+
+    <div class="annotation">↓ Replace placeholders with actual video URLs from /wp-content/uploads/2024/10/</div>
+
+    <div class="video-grid">
+      <!-- Video 1: process/before-after -->
+      <div class="video-card">
+        <video class="video-thumb" poster="" muted loop>
+          <source src="https://www.turnkeybathremodel.com/wp-content/uploads/2024/10/video-1.mp4" type="video/mp4">
+        </video>
+        <div class="video-play-overlay">
+          <div class="play-btn">▶</div>
+          <div class="video-caption">Before &amp; After: 1-Day Tub-to-Shower Conversion</div>
+        </div>
+        <div class="video-card-label">New Orleans homeowner — completed in 6 hours</div>
+      </div>
+
+      <!-- Video 2: testimonial / customer story -->
+      <div class="video-card" style="background:#0a2f4a;">
+        <div style="width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#021f35,#0d4a78);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+          <div style="width:80px;height:80px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;">🛁</div>
+          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">CUSTOMER VIDEO TESTIMONIAL</div>
+          <div style="color:rgba(255,255,255,.4);font-size:12px;">Upload/link client video here</div>
+        </div>
+        <div class="video-play-overlay">
+          <div class="play-btn">▶</div>
+          <div class="video-caption">"They finished our shower in one day — incredible!"</div>
+        </div>
+        <div class="video-card-label">★★★★★ Verified Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+  TESTIMONIALS
+══════════════════════════════════════════════════ -->
+<section class="testimonials-section">
+  <div class="section-inner">
+    <div class="section-label">What Customers Say</div>
+    <h2 class="section-title">Why Louisiana Homeowners<br>Choose TurnKey</h2>
+
+    <div class="annotation">↓ Pull real reviews from Google — Habib to confirm count/rating</div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">
+          "I was skeptical they could finish a full tub-to-shower conversion in one day,
+          but they proved me wrong. The crew was professional, the work was flawless,
+          and my new shower looks incredible. Highly recommend TurnKey!"
+        </p>
+        <div class="t-author">
+          <div class="t-avatar">M</div>
+          <div>
+            <div class="t-name">Michelle T.</div>
+            <div class="t-location">Metairie, LA</div>
+          </div>
+          <div class="t-source" style="margin-left:auto;">Google ★</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">
+          "After three other contractors gave us runaround quotes, TurnKey came in,
+          gave us a clear price, and had the job done the very next week. Clean,
+          fast, and exactly what we wanted. Bathroom looks brand new."
+        </p>
+        <div class="t-author">
+          <div class="t-avatar">D</div>
+          <div>
+            <div class="t-name">David &amp; Karen R.</div>
+            <div class="t-location">Kenner, LA</div>
+          </div>
+          <div class="t-source" style="margin-left:auto;">Google ★</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">
+          "My mom needed a walk-in shower for safety reasons. TurnKey understood
+          the urgency, got her scheduled quickly, and the barrier-free shower they
+          installed has given her so much independence. Thank you!"
+        </p>
+        <div class="t-author">
+          <div class="t-avatar">S</div>
+          <div>
+            <div class="t-name">Sandra F.</div>
+            <div class="t-location">Covington, LA</div>
+          </div>
+          <div class="t-source" style="margin-left:auto;">Google ★</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">
+          "Price was fair, timeline was accurate, and the finished product exceeded
+          my expectations. I've already told four neighbors about TurnKey. This is
+          what every contractor should be like."
+        </p>
+        <div class="t-author">
+          <div class="t-avatar">J</div>
+          <div>
+            <div class="t-name">James B.</div>
+            <div class="t-location">Slidell, LA</div>
+          </div>
+          <div class="t-source" style="margin-left:auto;">Facebook ★</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">
+          "Booking was easy, the designer helped us pick exactly the right style,
+          and installation day was shockingly clean and quiet. We will definitely
+          use TurnKey again for our second bathroom."
+        </p>
+        <div class="t-author">
+          <div class="t-avatar">L</div>
+          <div>
+            <div class="t-name">Lisa M.</div>
+            <div class="t-location">Mandeville, LA</div>
+          </div>
+          <div class="t-source" style="margin-left:auto;">Google ★</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">
+          "I was nervous about the cost but their financing made it completely
+          manageable. And the results? My bathroom looks like it belongs in a
+          magazine. Zero regrets. TurnKey is the real deal."
+        </p>
+        <div class="t-author">
+          <div class="t-avatar">A</div>
+          <div>
+            <div class="t-name">Angela W.</div>
+            <div class="t-location">Hammond, LA</div>
+          </div>
+          <div class="t-source" style="margin-left:auto;">Google ★</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+  SOCIAL FEED
+══════════════════════════════════════════════════ -->
+<section class="social-section">
+  <div class="section-inner">
+    <div class="social-header">
+      <div class="social-icon-ig">📸</div>
+      <div>
+        <div class="social-handle">@turnkeybathremodel</div>
+        <div class="social-sub">Follow us for before &amp; after reveals</div>
+      </div>
+    </div>
+
+    <div class="annotation">↓ Replace with EmbedSocial, Juicer, or Tagembed Instagram feed widget</div>
+
+    <div class="social-grid">
+      <!-- 5 placeholder post tiles -->
+      <div class="social-post-placeholder">Before &amp; After</div>
+      <div class="social-post-placeholder">Shower Install</div>
+      <div class="social-post-placeholder">1-Day Job</div>
+      <div class="social-post-placeholder">Customer Review</div>
+      <div class="social-post-placeholder">New Tile Design</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+  BOTTOM CTA
+══════════════════════════════════════════════════ -->
+<section class="bottom-cta">
+  <h2>Your New Bathroom Is<br>One Call Away</h2>
+  <p>
+    Schedule a free, no-pressure in-home consultation and get a custom quote
+    for your bathroom transformation — completed in as little as one day.
+  </p>
+  <div class="cta-buttons">
+    <a href="#consultation-form" class="btn-primary-cta">📋 Schedule Free Consultation</a>
+    <a href="tel:+15045136366" class="btn-secondary-cta">📞 Call (504) 513-6366</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+  FOOTER (minimal — keep traffic on-page)
+══════════════════════════════════════════════════ -->
+<footer>
+  <p>
+    © 2026 TurnKey Bath Remodel | New Orleans, LA |
+    <a href="tel:+15045136366">(504) 513-6366</a> |
+    <a href="https://www.turnkeybathremodel.com/terms-and-conditions/">Terms</a>
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+  STICKY MOBILE BAR
+══════════════════════════════════════════════════ -->
+<div class="sticky-mobile-cta">
+  <a href="tel:+15045136366" class="mob-call">📞 Call Now</a>
+  <a href="#consultation-form" class="mob-form">Get Free Quote</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  VIDEO AUTOPLAY (muted)
+══════════════════════════════════════════════════ -->
+<script>
+  document.querySelectorAll('video').forEach(v => {
+    v.play().catch(() => {});
+  });
+
+  // Scroll-to-form smooth behavior
+  document.querySelectorAll('a[href="#consultation-form"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('consultation-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+</script>
+
+</body>
+</html>
