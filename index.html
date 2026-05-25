@@ -238,14 +238,6 @@
     gap: 20px;
   }
   .proof-item { text-align: center; }
-  .proof-number {
-    display: block;
-    font-family: 'Outfit', sans-serif;
-    font-size: 40px;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1;
-  }
   .proof-label {
     display: block;
     font-size: 13px;
@@ -535,34 +527,107 @@
   }
   .btn-secondary-cta:hover { border-color: #fff; background: rgba(255,255,255,.08); }
 
-  /* === TRUST BAR === */
-  .trust-bar {
-    background: var(--white);
-    border-top: 1px solid #e8f0f7;
-    border-bottom: 1px solid #e8f0f7;
-    padding: 24px;
+  /* === ANIMATIONS === */
+  /* Fade + slide up on scroll */
+  .anim-fade {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .65s ease, transform .65s ease;
   }
-  .trust-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 16px;
+  .anim-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
+  /* Stagger children */
+  .anim-stagger > * {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .5s ease, transform .5s ease;
   }
-  .trust-item .check-icon {
-    color: var(--blue);
-    font-size: 18px;
+  .anim-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:.05s; }
+  .anim-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:.15s; }
+  .anim-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:.25s; }
+  .anim-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:.35s; }
+  .anim-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:.45s; }
+  .anim-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:.55s; }
+  /* Slide in from right (form card) */
+  .anim-slide-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity .7s ease, transform .7s ease;
+    transition-delay: .15s;
   }
+  .anim-slide-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  /* Proof bar count-up pulse */
+  .proof-number {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+    transition: transform .3s ease;
+  }
+  .proof-item.pop .proof-number {
+    animation: popNum .4s ease;
+  }
+  @keyframes popNum {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+  /* Hero badge pulse dot */
+  .hero-badge .dot {
+    animation: pulseDot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.5); opacity: .6; }
+  }
+  /* Proof bar items fade in on scroll */
+  .proof-inner .proof-item {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .proof-inner.visible .proof-item:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:.0s; }
+  .proof-inner.visible .proof-item:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:.1s; }
+  .proof-inner.visible .proof-item:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:.2s; }
+  .proof-inner.visible .proof-item:nth-child(7) { opacity:1; transform:translateY(0); transition-delay:.3s; }
+  /* Testimonial cards cascade */
+  .testimonial-card {
+    opacity: 0;
+    transform: translateY(24px) scale(.98);
+    transition: opacity .5s ease, transform .5s ease, box-shadow .2s;
+  }
+  .testimonials-grid.visible .testimonial-card:nth-child(1) { opacity:1; transform:translateY(0) scale(1); transition-delay:.05s; }
+  .testimonials-grid.visible .testimonial-card:nth-child(2) { opacity:1; transform:translateY(0) scale(1); transition-delay:.15s; }
+  .testimonials-grid.visible .testimonial-card:nth-child(3) { opacity:1; transform:translateY(0) scale(1); transition-delay:.25s; }
+  .testimonials-grid.visible .testimonial-card:nth-child(4) { opacity:1; transform:translateY(0) scale(1); transition-delay:.35s; }
+  .testimonials-grid.visible .testimonial-card:nth-child(5) { opacity:1; transform:translateY(0) scale(1); transition-delay:.45s; }
+  .testimonials-grid.visible .testimonial-card:nth-child(6) { opacity:1; transform:translateY(0) scale(1); transition-delay:.55s; }
+  /* Video cards pop */
+  .video-card {
+    opacity: 0;
+    transform: scale(.96);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .video-grid.visible .video-card:nth-child(1) { opacity:1; transform:scale(1); transition-delay:.05s; }
+  .video-grid.visible .video-card:nth-child(2) { opacity:1; transform:scale(1); transition-delay:.2s; }
+  /* Social tiles stagger */
+  .social-post-placeholder {
+    opacity: 0;
+    transform: scale(.92);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .social-grid.visible .social-post-placeholder:nth-child(1) { opacity:1; transform:scale(1); transition-delay:.0s; }
+  .social-grid.visible .social-post-placeholder:nth-child(2) { opacity:1; transform:scale(1); transition-delay:.08s; }
+  .social-grid.visible .social-post-placeholder:nth-child(3) { opacity:1; transform:scale(1); transition-delay:.16s; }
+  .social-grid.visible .social-post-placeholder:nth-child(4) { opacity:1; transform:scale(1); transition-delay:.24s; }
+  .social-grid.visible .social-post-placeholder:nth-child(5) { opacity:1; transform:scale(1); transition-delay:.32s; }
 
   /* === FOOTER === */
   footer {
@@ -650,14 +715,14 @@
   <div class="hero-inner">
 
     <!-- Left: headline + bullets -->
-    <div>
+    <div class="anim-fade">
       <div class="hero-badge"><span class="dot"></span>New Orleans' #1 Bath Remodeler</div>
       <h1>Your Dream Bathroom,<br><em>Installed in as Little as 1 Day</em></h1>
       <p class="hero-subhead">
         Louisiana homeowners trust TurnKey for stress-free bathroom transformations
         that fit any budget — with zero mess, zero delays, and a lifetime guarantee.
       </p>
-      <ul class="hero-bullets">
+      <ul class="hero-bullets anim-stagger">
         <li><span class="check">✓</span> 1-Day installation available</li>
         <li><span class="check">✓</span> 100% Lifetime Warranty</li>
         <li><span class="check">✓</span> Financing options available</li>
@@ -667,7 +732,7 @@
     </div>
 
     <!-- Right: lead capture form -->
-    <div class="form-card" id="consultation-form">
+    <div class="form-card anim-slide-right" id="consultation-form">
       <div class="form-stars">
         <span class="stars">★★★★★</span>
         <span>500+ Five-Star Reviews</span>
@@ -716,19 +781,6 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-  TRUST BAR
-══════════════════════════════════════════════════ -->
-<div class="trust-bar">
-  <div class="trust-inner">
-    <div class="trust-item"><span class="check-icon">✓</span> Residential Lic. #890459</div>
-    <div class="trust-item"><span class="check-icon">✓</span> Commercial Lic. #3667</div>
-    <div class="trust-item"><span class="check-icon">✓</span> BBB Accredited</div>
-    <div class="trust-item"><span class="check-icon">✓</span> 100% Satisfaction Guaranteed</div>
-    <div class="trust-item"><span class="check-icon">✓</span> Serving Greater New Orleans</div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════
   PROOF BAR
 ══════════════════════════════════════════════════ -->
 <div class="proof-bar">
@@ -760,9 +812,9 @@
 ══════════════════════════════════════════════════ -->
 <section class="video-section">
   <div class="section-inner">
-    <div class="section-label">See the Work</div>
-    <h2 class="section-title">Real Transformations.<br>Real Louisiana Homeowners.</h2>
-    <p class="section-sub">
+    <div class="section-label anim-fade">See the Work</div>
+    <h2 class="section-title anim-fade">Real Transformations.<br>Real Louisiana Homeowners.</h2>
+    <p class="section-sub anim-fade">
       Watch what TurnKey installs in as little as a single day —
       no gimmicks, no contractors in your house for weeks.
     </p>
@@ -804,8 +856,8 @@
 ══════════════════════════════════════════════════ -->
 <section class="testimonials-section">
   <div class="section-inner">
-    <div class="section-label">What Customers Say</div>
-    <h2 class="section-title">Why Louisiana Homeowners<br>Choose TurnKey</h2>
+    <div class="section-label anim-fade">What Customers Say</div>
+    <h2 class="section-title anim-fade">Why Louisiana Homeowners<br>Choose TurnKey</h2>
 
     <div class="annotation">↓ Pull real reviews from Google — Habib to confirm count/rating</div>
 
@@ -979,20 +1031,77 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
-  VIDEO AUTOPLAY (muted)
+  SCRIPTS: video autoplay + scroll animations
 ══════════════════════════════════════════════════ -->
 <script>
-  document.querySelectorAll('video').forEach(v => {
-    v.play().catch(() => {});
-  });
+  // --- Video autoplay ---
+  document.querySelectorAll('video').forEach(v => { v.play().catch(() => {}); });
 
-  // Scroll-to-form smooth behavior
+  // --- Smooth scroll to form ---
   document.querySelectorAll('a[href="#consultation-form"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
       document.getElementById('consultation-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });
+
+  // --- Intersection Observer: trigger .visible on scroll ---
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Proof bar: trigger count-up pop on numbers
+        if (entry.target.classList.contains('proof-inner')) {
+          entry.target.querySelectorAll('.proof-item').forEach((item, i) => {
+            setTimeout(() => item.classList.add('pop'), i * 120);
+          });
+        }
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  // Observe all animated elements
+  document.querySelectorAll(
+    '.anim-fade, .anim-stagger, .anim-slide-right, ' +
+    '.proof-inner, .video-grid, .testimonials-grid, .social-grid'
+  ).forEach(el => io.observe(el));
+
+  // Hero elements visible immediately (above fold)
+  document.querySelectorAll('.hero .anim-fade, .hero .anim-stagger, .hero .anim-slide-right')
+    .forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 120);
+    });
+
+  // --- Count-up animation for proof numbers ---
+  function countUp(el, target, suffix, duration) {
+    const isNum = /^\d+$/.test(target);
+    if (!isNum) return; // "1 Day", "Lifetime" — leave as-is
+    let start = 0;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = start + suffix;
+      if (start >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  // Wire count-up to proof bar visibility
+  const proofObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // 500+ → count from 0 to 500
+        const nums = entry.target.querySelectorAll('.proof-number');
+        nums.forEach(n => {
+          const raw = n.textContent.trim();
+          if (raw === '500+') countUp(n, 500, '+', 1200);
+          // others are non-numeric, leave animated by CSS
+        });
+        proofObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.proof-inner').forEach(el => proofObs.observe(el));
 </script>
 
 </body>
