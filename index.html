@@ -1408,65 +1408,63 @@
   window.closeModalOutside = closeModalOutside;
 
   // === STICKY FORM ===
-  // GHL iframe is 1491px — CSS sticky has no scroll range.
-  // Fix: JS-based fixed positioning.
-  // Key rules:
-  //   - Lock hero to original full height (prevents proof bar from jumping up when form goes fixed)
-  //   - Unfix based on left column exit (not hero exit — hero is 1621px, left col only 400px)
-  (function stickyForm() {
-    var formCard = document.getElementById('consultation-form');
-    var hero     = document.querySelector('.hero');
-    var heroLeft = document.querySelector('.hero-inner > div:first-child');
-    if (!formCard || !hero || !heroLeft) return;
+  // Problem: GHL resizes iframe to 1491px AFTER window.load fires.
+  // Solution: delay capture 3s so GHL finishes, then use absolute scroll coords.
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var form     = document.getElementById('consultation-form');
+      var hero     = document.querySelector('.hero');
+      var heroLeft = document.querySelector('.hero-inner > div:first-child');
+      if (!form || !hero || !heroLeft) return;
+      if (window.innerWidth < 769) return;
 
-    var isFixed = false;
-    var capturedRight, capturedWidth, capturedHeroHeight;
+      // Snapshot absolute document positions AFTER GHL has loaded
+      var sy0          = window.scrollY;
+      var formRect     = form.getBoundingClientRect();
+      var fixedRight   = window.innerWidth - formRect.right;
+      var fixedWidth   = form.offsetWidth;
+      var heroHeight   = hero.offsetHeight;                          // real height including GHL iframe
+      var leftBottomY  = heroLeft.getBoundingClientRect().bottom + sy0; // abs Y where left col ends
 
-    function capture() {
-      var rect      = formCard.getBoundingClientRect();
-      capturedRight = window.innerWidth - rect.right;
-      capturedWidth = formCard.offsetWidth;
-      capturedHeroHeight = hero.offsetHeight; // full 1621px — must be locked when form goes fixed
-    }
+      // Lock hero so proof bar doesn't jump when form goes fixed
+      hero.style.minHeight = heroHeight + 'px';
 
-    function fix() {
-      if (isFixed) return;
-      hero.style.minHeight = capturedHeroHeight + 'px'; // keeps proof bar from jumping up
-      formCard.style.position  = 'fixed';
-      formCard.style.top       = '90px';
-      formCard.style.right     = capturedRight + 'px';
-      formCard.style.width     = capturedWidth + 'px';
-      formCard.style.maxHeight = 'calc(100vh - 110px)';
-      formCard.style.overflowY = 'auto';
-      formCard.style.zIndex    = '50';
-      isFixed = true;
-    }
+      var isFixed = false;
 
-    function unfix() {
-      if (!isFixed) return;
-      formCard.style.position  = '';
-      formCard.style.top       = '';
-      formCard.style.right     = '';
-      formCard.style.width     = '';
-      formCard.style.maxHeight = '';
-      formCard.style.overflowY = '';
-      formCard.style.zIndex    = '';
-      hero.style.minHeight     = ''; // natural hero height = GHL form height ≈ same as capturedHeroHeight → no jump
-      isFixed = false;
-    }
+      function fix() {
+        if (isFixed) return;
+        form.style.position  = 'fixed';
+        form.style.top       = '90px';
+        form.style.right     = fixedRight + 'px';
+        form.style.width     = fixedWidth + 'px';
+        form.style.maxHeight = 'calc(100vh - 110px)';
+        form.style.overflowY = 'auto';
+        form.style.zIndex    = '50';
+        isFixed = true;
+      }
 
-    function update() {
-      if (window.innerWidth < 769) { unfix(); return; }
-      var r = heroLeft.getBoundingClientRect(); // left col: ~400px tall, not 1491px
-      if (r.top < 90 && r.bottom > 0) { fix(); } else { unfix(); }
-    }
+      function unfix() {
+        if (!isFixed) return;
+        form.style.position  = '';
+        form.style.top       = '';
+        form.style.right     = '';
+        form.style.width     = '';
+        form.style.maxHeight = '';
+        form.style.overflowY = '';
+        form.style.zIndex    = '';
+        isFixed = false;
+      }
 
-    window.addEventListener('load', function () {
-      capture();
+      function update() {
+        var sy   = window.scrollY;
+        var navH = 90;
+        // Fix while hero has scrolled past nav AND left col hasn't fully exited viewport
+        if (sy + navH > 0 && sy < leftBottomY) { fix(); } else { unfix(); }
+      }
+
       window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', function () { unfix(); capture(); });
-    });
-  })();
+    }, 3000);
+  });
 </script>
 
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
