@@ -1407,46 +1407,58 @@
   window.closeModal = closeModal;
   window.closeModalOutside = closeModalOutside;
 
-  // === STICKY FORM (JS-based — GHL iframe is 1491px so CSS sticky has no scroll range) ===
+  // === STICKY FORM ===
+  // GHL iframe is 1491px — CSS sticky has no scroll range.
+  // Fix: JS-based fixed positioning.
+  // Key rules:
+  //   - Lock hero to original full height (prevents proof bar from jumping up when form goes fixed)
+  //   - Unfix based on left column exit (not hero exit — hero is 1621px, left col only 400px)
   (function stickyForm() {
-    const formCard = document.getElementById('consultation-form');
-    const heroLeft = document.querySelector('.hero-inner > div:first-child');
-    if (!formCard || !heroLeft) return;
+    var formCard = document.getElementById('consultation-form');
+    var hero     = document.querySelector('.hero');
+    var heroLeft = document.querySelector('.hero-inner > div:first-child');
+    if (!formCard || !hero || !heroLeft) return;
 
-    let isFixed = false;
-    let capturedRight, capturedWidth;
+    var isFixed = false;
+    var capturedRight, capturedWidth, capturedHeroHeight;
 
     function capture() {
-      const rect    = formCard.getBoundingClientRect();
+      var rect      = formCard.getBoundingClientRect();
       capturedRight = window.innerWidth - rect.right;
       capturedWidth = formCard.offsetWidth;
+      capturedHeroHeight = hero.offsetHeight; // full 1621px — must be locked when form goes fixed
     }
 
     function fix() {
       if (isFixed) return;
-      Object.assign(formCard.style, {
-        position : 'fixed',
-        top      : '90px',
-        right    : capturedRight + 'px',
-        width    : capturedWidth + 'px',
-        maxHeight: 'calc(100vh - 110px)',
-        overflowY: 'auto',
-        zIndex   : '50'
-      });
+      hero.style.minHeight = capturedHeroHeight + 'px'; // keeps proof bar from jumping up
+      formCard.style.position  = 'fixed';
+      formCard.style.top       = '90px';
+      formCard.style.right     = capturedRight + 'px';
+      formCard.style.width     = capturedWidth + 'px';
+      formCard.style.maxHeight = 'calc(100vh - 110px)';
+      formCard.style.overflowY = 'auto';
+      formCard.style.zIndex    = '50';
       isFixed = true;
     }
 
     function unfix() {
       if (!isFixed) return;
-      ['position','top','right','width','maxHeight','overflowY','zIndex'].forEach(p => formCard.style[p] = '');
+      formCard.style.position  = '';
+      formCard.style.top       = '';
+      formCard.style.right     = '';
+      formCard.style.width     = '';
+      formCard.style.maxHeight = '';
+      formCard.style.overflowY = '';
+      formCard.style.zIndex    = '';
+      hero.style.minHeight     = ''; // natural hero height = GHL form height ≈ same as capturedHeroHeight → no jump
       isFixed = false;
     }
 
     function update() {
       if (window.innerWidth < 769) { unfix(); return; }
-      // Track left column (always in flow) — unfix when it fully exits viewport
-      const r = heroLeft.getBoundingClientRect();
-      (r.top < 90 && r.bottom > 0) ? fix() : unfix();
+      var r = heroLeft.getBoundingClientRect(); // left col: ~400px tall, not 1491px
+      if (r.top < 90 && r.bottom > 0) { fix(); } else { unfix(); }
     }
 
     window.addEventListener('load', function () {
