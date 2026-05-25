@@ -178,7 +178,6 @@
     background: linear-gradient(135deg, var(--navy) 0%, #0a3554 60%, #0d4a78 100%);
     padding: 60px 24px 70px;
     position: relative;
-    overflow: hidden;
   }
   .hero::before {
     content: '';
@@ -192,7 +191,7 @@
     display: grid;
     grid-template-columns: 1fr 420px;
     gap: 48px;
-    align-items: center;
+    align-items: start;
     position: relative;
     z-index: 2;
   }
@@ -259,6 +258,8 @@
     border-radius: 14px;
     padding: 12px 16px;
     box-shadow: 0 24px 60px rgba(0,0,0,.35);
+    position: sticky;
+    top: 90px;
   }
   .form-card-title {
     font-family: 'Outfit', sans-serif;
