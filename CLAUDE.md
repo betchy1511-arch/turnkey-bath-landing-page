@@ -65,17 +65,30 @@ Iframe height set to `100%` — GHL script auto-resizes via postMessage.
 - Videos 1+2 (remote): `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/`
 - Videos 3+4 (local MP4): `demo-day-cleveland.mp4`, `bathroom-cleveland.mp4`
 - Video posters (local): `poster-demo-day.jpg`, `poster-bathroom.jpg`
-- Gallery images: `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_*.jpg`
+- Gallery images: first 10 remote from `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_*.jpg`; 10 local jpegs committed to repo root: IMG_5425, IMG_5434, IMG_5450, IMG_5463, IMG_5464, IMG_5480, IMG_5500, IMG_5487, IMG_5498, IMG_5503
 - Logo: `https://www.turnkeybathremodel.com/wp-content/uploads/2023/12/logo.png`
 - Bottom CTA background image: `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7160-scaled-1.jpg`
 
+## Gallery
+
+20 photos total, 4-column grid (`gallery-10` class, `repeat(4,1fr)`). Lightbox opens on click.
+
+## Sticky Form — Known Issue
+
+GHL auto-resizes iframe to 1491px AFTER `window.load` — CSS sticky has zero scroll range, JS fixed approaches fail because hero height capture runs before GHL finishes. Tried 5+ approaches, all failed.
+
+**Root cause:** Need to capture hero height AFTER GHL loads (timing unknown/async).
+**Correct fix:** Add content to hero LEFT column to fill the dead space below bullets and match the form height. Once left col height ~= form height, CSS sticky works naturally.
+**Current state:** 3s-delay JS approach is in the page as latest attempt.
+
 ## Pending / Resume Next Session
 
-- **Hero left column empty space** — below the bullet list there is dead space when the GHL form is taller than the left content. Still needs a solution (before/after photo, testimonial quote, or additional content block).
-- **Local videos 3+4 not playing** — `demo-day-cleveland.mp4` and `bathroom-cleveland.mp4` served from GitHub Pages may be slow/unreliable. Permanent fix: upload to `turnkeyrenovators.com/wp-content/uploads/` and update src URLs.
-- **Facebook CAPI:** Pixel ID `987920936622343` — needs server-side CAPI events wired to GHL form submissions and calls.
-- **Call tracking:** GHL tracking number (forward to 504-513-6366) to fire FB Lead event on call.
-- **GTM:** `GTM-TTL734MD` (main site) — needs to be added to landing page.
+- **Sticky form** — add content to hero left column (testimonial, before/after, guarantee badge) to match ~1491px form height, then switch back to CSS sticky
+- **Hero left column empty space** — same as above; dead space below bullets when GHL form is taller than left content
+- **Local videos 3+4 not playing** — `demo-day-cleveland.mp4` and `bathroom-cleveland.mp4` may be slow from GitHub Pages. Fix: upload to `turnkeyrenovators.com/wp-content/uploads/` and update src URLs
+- **Facebook CAPI:** Pixel ID `987920936622343` — needs server-side CAPI events wired to GHL form submissions and calls
+- **Call tracking:** GHL tracking number (forward to 504-513-6366) to fire FB Lead event on call
+- **GTM:** `GTM-TTL734MD` (main site) — needs to be added to landing page
 
 ## Brand Colors
 
