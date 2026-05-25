@@ -398,12 +398,14 @@
   }
 
   /* === SOCIAL FEED === */
-  .social-section { background: var(--gray); }
+  .social-section { background: var(--navy); }
   .social-header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     margin-bottom: 36px;
+    text-align: center;
   }
   .social-icon-ig {
     width: 44px; height: 44px; border-radius: 12px;
@@ -415,9 +417,9 @@
     font-family: 'Outfit', sans-serif;
     font-size: 20px;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--white);
   }
-  .social-sub { font-size: 14px; color: #6a849a; }
+  .social-sub { font-size: 14px; color: rgba(255,255,255,.65); }
   .social-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -1036,12 +1038,8 @@
       <div class="social-icon-ig">📸</div>
       <div>
         <div class="social-handle">Real Project Photos</div>
-        <div class="social-sub">Actual work from Louisiana homeowners — no stock photos</div>
+        <div class="social-sub">Actual work from Louisiana homeowners, no stock photos</div>
       </div>
-      <a href="https://www.turnkeyrenovators.com/gallery/" target="_blank" rel="noopener"
-         style="margin-left:auto;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--blue);text-decoration:none;">
-        View Full Gallery →
-      </a>
     </div>
 
     <div class="social-grid gallery-10">
