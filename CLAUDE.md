@@ -19,19 +19,34 @@ No build step. Pure HTML/CSS/JS — edit `index.html` and push.
 Single file: `index.html`. All CSS is in `<style>`, all JS in a `<script>` at the bottom.
 
 **Page sections (top to bottom):**
-1. Sticky nav — logo + phone + CTA button. No nav links (keeps traffic on-page).
-2. Hero — headline + bullet list + lead capture form (left/right grid)
+1. Sticky nav — logo (left) + trust strip center (stars + rating) + license badges + phone + "Get a Free Consultation" button (right)
+2. Hero — headline + bullet list (left) + GHL Banner Form iframe (right)
 3. Proof bar — 4 stats: 500+, 25+ years, 4.9★, 1 Day
-4. Video section — 2×2 grid, autoplay muted, click to unmute + controls
+4. Video section — 2x2 grid, dark gray bg, centered heading, autoplay muted, click to unmute
 5. Testimonials — 6 real customer cards (3-column grid)
-6. Gallery — 10 real project photos (5×2 grid) from turnkeyrenovators.com/gallery/
-7. Bottom CTA — book + call buttons
+6. Gallery — 10 real project photos (5x2 grid), dark navy bg, lightbox on click
+7. Bottom CTA — photo background + gradient overlay, book + call buttons
 8. Footer — address, hours, phone, terms link
 9. Sticky mobile bar — call + form buttons (mobile only)
+10. Popup modal — opens from nav "Get a Free Consultation" button, contains GHL Popup Form iframe
 
 **Animation system** — IntersectionObserver triggers `.visible` class on scroll. Elements use `.anim-fade`, `.anim-stagger`, `.anim-slide-right`. Proof bar numbers count up via JS (`countUp()`). Video/testimonial/gallery tiles use nth-child stagger delays in CSS.
 
 **Video behavior** — `video` tags autoplay muted loop on load. `toggleVideo(card)` on click: first click unmutes + shows native controls, subsequent clicks toggle play/pause.
+
+**Lightbox** — clicking any gallery photo opens full-size image in dark overlay. Click outside or Escape to close.
+
+**Modal** — nav CTA opens popup modal with GHL form. Click outside or Escape to close. Body scroll locks when open.
+
+## GHL Forms
+
+| Location | Form Name | Form ID |
+|----------|-----------|---------|
+| Hero card (right side) | Banner Form-w | `C0aHdvenmYAA0VRySz1o` |
+| Nav popup modal | Popup Form-w | `wLSQ2oSWOhjgp6luyG8A` |
+
+GHL embed script loaded once before `</body>`: `https://link.msgsndr.com/js/form_embed.js`
+Iframe height set to `100%` — GHL script auto-resizes via postMessage.
 
 ## Key Facts (do not invent — use these)
 
@@ -43,20 +58,24 @@ Single file: `index.html`. All CSS is in `<style>`, all JS in a `<script>` at th
 - **Warranty:** Lifetime on acrylic products + 10-year workmanship
 - **Financing:** 0% available for qualified homeowners
 - **Free consultation:** $250 value
+- **Licenses:** Residential LA #890459, Commercial LA #3667
 
 ## Asset Sources
 
-- Videos (remote): `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/` and `/2025/12/`
-- Videos (local): `demo-day-cleveland.mov`, `bathroom-cleveland.mov`
+- Videos 1+2 (remote): `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/`
+- Videos 3+4 (local MP4): `demo-day-cleveland.mp4`, `bathroom-cleveland.mp4`
+- Video posters (local): `poster-demo-day.jpg`, `poster-bathroom.jpg`
 - Gallery images: `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_*.jpg`
 - Logo: `https://www.turnkeybathremodel.com/wp-content/uploads/2023/12/logo.png`
+- Bottom CTA background image: `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7160-scaled-1.jpg`
 
-## Pending Integration (not yet live)
+## Pending / Resume Next Session
 
-- **Form:** Replace the HTML form with GoHighLevel (LeadConnector) widget — `api.leadconnectorhq.com/widget/form/gfFoD91YKrsWMVrYtujS` is the existing embed on the main site
-- **Facebook CAPI:** Pixel ID `987920936622343` already on main site — needs server-side CAPI events wired to form submissions and calls
-- **Call tracking:** GHL tracking number (forward to 504-513-6366) to fire FB Lead event on call
-- **GTM:** `GTM-TTL734MD` (main site) — needs to be added to landing page
+- **Hero left column empty space** — below the bullet list there is dead space when the GHL form is taller than the left content. Still needs a solution (before/after photo, testimonial quote, or additional content block).
+- **Local videos 3+4 not playing** — `demo-day-cleveland.mp4` and `bathroom-cleveland.mp4` served from GitHub Pages may be slow/unreliable. Permanent fix: upload to `turnkeyrenovators.com/wp-content/uploads/` and update src URLs.
+- **Facebook CAPI:** Pixel ID `987920936622343` — needs server-side CAPI events wired to GHL form submissions and calls.
+- **Call tracking:** GHL tracking number (forward to 504-513-6366) to fire FB Lead event on call.
+- **GTM:** `GTM-TTL734MD` (main site) — needs to be added to landing page.
 
 ## Brand Colors
 
