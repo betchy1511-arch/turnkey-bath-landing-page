@@ -102,9 +102,11 @@
   .modal-box {
     background: var(--white);
     border-radius: 16px;
-    padding: 40px 36px;
-    max-width: 480px;
+    padding: 24px 28px;
+    max-width: 520px;
     width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     box-shadow: 0 32px 80px rgba(0,0,0,.4);
     animation: modalIn .25s ease;
@@ -860,44 +862,23 @@
 <div class="modal-overlay" id="consultModal" onclick="closeModalOutside(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="form-stars">
-      <span class="stars">★★★★★</span>
-      <span>500+ Five-Star Reviews</span>
-    </div>
-    <div class="form-card-title">Schedule Your FREE Consultation</div>
-    <div class="form-card-sub">Takes 60 seconds. No obligation.</div>
-    <form class="form-row" onsubmit="return false;">
-      <div class="form-group">
-        <label for="m-fname">Full Name</label>
-        <input type="text" id="m-fname" placeholder="Jane Smith">
-      </div>
-      <div class="form-group">
-        <label for="m-phone">Phone Number</label>
-        <input type="tel" id="m-phone" placeholder="(504) 555-0100">
-      </div>
-      <div class="form-group">
-        <label for="m-email">Email Address</label>
-        <input type="email" id="m-email" placeholder="jane@email.com">
-      </div>
-      <div class="form-group">
-        <label for="m-project">What Do You Need?</label>
-        <select id="m-project">
-          <option value="">— Select a project type —</option>
-          <option>Tub-to-Shower Conversion</option>
-          <option>Replacement Shower</option>
-          <option>Barrier-Free / Walk-In Shower</option>
-          <option>Shower Liner or Surround</option>
-          <option>Walk-In Tub</option>
-          <option>Bathtub Replacement</option>
-          <option>Not Sure — Need a Consultation</option>
-        </select>
-      </div>
-      <button type="submit" class="form-submit">Get My FREE Consultation →</button>
-    </form>
-    <p class="form-disclaimer">
-      🔒 Your info is 100% private. We never sell or share your data.<br>
-      A local TurnKey specialist will call you within 2 business hours.
-    </p>
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/wLSQ2oSWOhjgp6luyG8A"
+      style="width:100%;height:1445px;border:none;border-radius:3px"
+      id="inline-wLSQ2oSWOhjgp6luyG8A"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Popup Form-w"
+      data-height="1445"
+      data-layout-iframe-id="inline-wLSQ2oSWOhjgp6luyG8A"
+      data-form-id="wLSQ2oSWOhjgp6luyG8A"
+      title="Popup Form-w">
+    </iframe>
   </div>
 </div>
 
@@ -926,47 +907,23 @@
 
     <!-- Right: lead capture form -->
     <div class="form-card anim-slide-right" id="consultation-form">
-      <div class="form-stars">
-        <span class="stars">★★★★★</span>
-        <span>500+ Five-Star Reviews</span>
-      </div>
-      <div class="form-card-title">Schedule Your FREE Consultation</div>
-      <div class="form-card-sub">Takes 60 seconds. No obligation.</div>
-
-      <form class="form-row" onsubmit="return false;">
-        <div class="form-group">
-          <label for="fname">Full Name</label>
-          <input type="text" id="fname" placeholder="Jane Smith">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="(504) 555-0100">
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="jane@email.com">
-        </div>
-        <div class="form-group">
-          <label for="project">What Do You Need?</label>
-          <select id="project">
-            <option value="">— Select a project type —</option>
-            <option>Tub-to-Shower Conversion</option>
-            <option>Replacement Shower</option>
-            <option>Barrier-Free / Walk-In Shower</option>
-            <option>Shower Liner or Surround</option>
-            <option>Walk-In Tub</option>
-            <option>Bathtub Replacement</option>
-            <option>Not Sure — Need a Consultation</option>
-          </select>
-        </div>
-        <button type="submit" class="form-submit">
-          Get My FREE Consultation →
-        </button>
-      </form>
-      <p class="form-disclaimer">
-        🔒 Your info is 100% private. We never sell or share your data.<br>
-        A local TurnKey specialist will call you within 2 business hours.
-      </p>
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/C0aHdvenmYAA0VRySz1o"
+        style="width:100%;height:1491px;border:none;border-radius:3px"
+        id="inline-C0aHdvenmYAA0VRySz1o"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Banner Form-w"
+        data-height="1491"
+        data-layout-iframe-id="inline-C0aHdvenmYAA0VRySz1o"
+        data-form-id="C0aHdvenmYAA0VRySz1o"
+        title="Banner Form-w">
+      </iframe>
     </div>
 
   </div>
@@ -1400,5 +1357,6 @@
   window.closeModalOutside = closeModalOutside;
 </script>
 
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </body>
 </html>
