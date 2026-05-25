@@ -737,6 +737,38 @@
   .social-video-tile:hover .gallery-play-btn { background: rgba(2,31,53,.6); }
   .social-video-tile.playing .gallery-play-btn { display: none; }
 
+  /* === LIGHTBOX === */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.92);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 18px; right: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .lightbox-close:hover { color: #ccc; }
+  .social-video-tile { cursor: zoom-in; }
+
   /* === FOOTER === */
   footer {
     background: #010e1a;
@@ -1162,20 +1194,28 @@
     </div>
 
     <div class="social-grid gallery-10">
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7160-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7159-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7176-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5099-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_0956-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7634-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7605-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5102-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_3221-350x250.png" alt="TurnKey bath remodel project" loading="lazy"></div>
-      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7157-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7160-scaled-1.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7160-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7159-scaled-1.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7159-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7176-scaled-1.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7176-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5099-scaled-1.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5099-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_0956-scaled-1.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_0956-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7634.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7634-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7605.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7605-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5102-scaled-1.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5102-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_3221.png')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_3221-350x250.png" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile" onclick="openLightbox('https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7157-scaled-1.jpg')"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7157-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
     </div>
 
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════
+  LIGHTBOX
+══════════════════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="TurnKey bath remodel project">
+</div>
 
 <!-- ═══════════════════════════════════════════════
   BOTTOM CTA
@@ -1336,6 +1376,25 @@
     if (e.target === document.getElementById('consultModal')) closeModal();
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  // --- Lightbox ---
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+    document.body.style.overflow = '';
+  }
+  function closeLightboxOutside(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
+  window.openLightbox = openLightbox;
+  window.closeLightbox = closeLightbox;
+  window.closeLightboxOutside = closeLightboxOutside;
+
   window.openModal = openModal;
   window.closeModal = closeModal;
   window.closeModalOutside = closeModalOutside;
