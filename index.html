@@ -34,22 +34,27 @@
     box-shadow: 0 2px 12px rgba(0,0,0,.25);
   }
   .nav-bar img.logo { height: 48px; }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
   .nav-phone {
     display: flex;
     align-items: center;
     gap: 10px;
     color: var(--white);
     font-family: 'Outfit', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     text-decoration: none;
   }
   .nav-phone .phone-icon {
     background: var(--blue);
     border-radius: 50%;
-    width: 36px; height: 36px;
+    width: 34px; height: 34px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
+    font-size: 15px;
   }
   .nav-cta-btn {
     background: var(--blue);
@@ -62,8 +67,51 @@
     text-decoration: none;
     white-space: nowrap;
     transition: background .2s;
+    cursor: pointer;
+    border: none;
   }
   .nav-cta-btn:hover { background: var(--blue-dark); }
+
+  /* === POPUP MODAL === */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(2,15,30,.75);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 40px 36px;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 32px 80px rgba(0,0,0,.4);
+    animation: modalIn .25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 18px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #7a94a8;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--navy); }
+  @media (max-width: 900px) {
+    .nav-phone { display: none; }
+  }
 
   /* === HERO === */
   .hero {
@@ -745,12 +793,61 @@
 <nav class="nav-bar">
   <img src="https://www.turnkeybathremodel.com/wp-content/uploads/2023/12/logo.png"
        alt="TurnKey Bath Remodel" class="logo">
-  <a href="tel:+15045136366" class="nav-phone">
-    <span class="phone-icon">📞</span>
-    (504) 513-6366
-  </a>
-  <a href="#consultation-form" class="nav-cta-btn">Get Free Quote</a>
+  <div class="nav-right">
+    <a href="tel:+15045136366" class="nav-phone">
+      <span class="phone-icon">📞</span>
+      (504) 513-6366
+    </a>
+    <button class="nav-cta-btn" onclick="openModal()">Get a Free Consultation</button>
+  </div>
 </nav>
+
+<!-- ═══════════════════════════════════════════════
+  POPUP MODAL
+══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="consultModal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="form-stars">
+      <span class="stars">★★★★★</span>
+      <span>500+ Five-Star Reviews</span>
+    </div>
+    <div class="form-card-title">Schedule Your FREE Consultation</div>
+    <div class="form-card-sub">Takes 60 seconds. No obligation.</div>
+    <form class="form-row" onsubmit="return false;">
+      <div class="form-group">
+        <label for="m-fname">Full Name</label>
+        <input type="text" id="m-fname" placeholder="Jane Smith">
+      </div>
+      <div class="form-group">
+        <label for="m-phone">Phone Number</label>
+        <input type="tel" id="m-phone" placeholder="(504) 555-0100">
+      </div>
+      <div class="form-group">
+        <label for="m-email">Email Address</label>
+        <input type="email" id="m-email" placeholder="jane@email.com">
+      </div>
+      <div class="form-group">
+        <label for="m-project">What Do You Need?</label>
+        <select id="m-project">
+          <option value="">— Select a project type —</option>
+          <option>Tub-to-Shower Conversion</option>
+          <option>Replacement Shower</option>
+          <option>Barrier-Free / Walk-In Shower</option>
+          <option>Shower Liner or Surround</option>
+          <option>Walk-In Tub</option>
+          <option>Bathtub Replacement</option>
+          <option>Not Sure — Need a Consultation</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit">Get My FREE Consultation →</button>
+    </form>
+    <p class="form-disclaimer">
+      🔒 Your info is 100% private. We never sell or share your data.<br>
+      A local TurnKey specialist will call you within 2 business hours.
+    </p>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════
   HERO + FORM
@@ -767,10 +864,10 @@
         that fit any budget — with zero mess, zero delays, and a lifetime guarantee.
       </p>
       <ul class="hero-bullets anim-stagger">
-        <li><span class="check">✓</span> FREE In-Home Design Consultation — a $250 Value</li>
-        <li><span class="check">✓</span> Fixed-Price Quotes — No Hidden Fees, Ever</li>
+        <li><span class="check">✓</span> FREE In-Home Design Consultation, a $250 Value</li>
+        <li><span class="check">✓</span> Fixed-Price Quotes. No Hidden Fees, Ever</li>
         <li><span class="check">✓</span> 0% Financing Available for Qualified Homeowners</li>
-        <li><span class="check">✓</span> Licensed &amp; Insured — LA #890459 &amp; #3667</li>
+        <li><span class="check">✓</span> Licensed &amp; Insured. LA #890459 &amp; #3667</li>
         <li><span class="check">✓</span> 25+ Years Serving Louisiana Homeowners</li>
       </ul>
     </div>
@@ -1205,6 +1302,23 @@
     vid.play().catch(() => {});
   }
   window.playGalleryVideo = playGalleryVideo;
+
+  // --- Modal open/close ---
+  function openModal() {
+    document.getElementById('consultModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('consultModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('consultModal')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.closeModalOutside = closeModalOutside;
 </script>
 
 </body>
