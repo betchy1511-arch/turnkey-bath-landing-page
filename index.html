@@ -34,6 +34,21 @@
     box-shadow: 0 2px 12px rgba(0,0,0,.25);
   }
   .nav-bar img.logo { height: 48px; }
+  .nav-trust {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .nav-stars { color: var(--star); font-size: 15px; letter-spacing: 2px; }
+  .nav-trust-text {
+    font-size: 12px;
+    color: rgba(255,255,255,.7);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    white-space: nowrap;
+  }
   .nav-right {
     display: flex;
     align-items: center;
@@ -111,6 +126,7 @@
   .modal-close:hover { color: var(--navy); }
   @media (max-width: 900px) {
     .nav-phone { display: none; }
+    .nav-trust { display: none; }
   }
 
   /* === HERO === */
@@ -793,6 +809,10 @@
 <nav class="nav-bar">
   <img src="https://www.turnkeybathremodel.com/wp-content/uploads/2023/12/logo.png"
        alt="TurnKey Bath Remodel" class="logo">
+  <div class="nav-trust">
+    <span class="nav-stars">★★★★★</span>
+    <span class="nav-trust-text">4.9 Google Rating &nbsp;|&nbsp; 500+ Bathrooms Remodeled</span>
+  </div>
   <div class="nav-right">
     <a href="tel:+15045136366" class="nav-phone">
       <span class="phone-icon">📞</span>
