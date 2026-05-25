@@ -30,7 +30,7 @@ Single file: `index.html`. All CSS is in `<style>`, all JS in a `<script>` at th
 9. Sticky mobile bar — call + form buttons (mobile only)
 10. Popup modal — opens from nav "Get a Free Consultation" button, contains GHL Popup Form iframe
 
-**Animation system** — IntersectionObserver triggers `.visible` class on scroll. Elements use `.anim-fade`, `.anim-stagger`, `.anim-slide-right`. Proof bar numbers count up via JS (`countUp()`). Video/testimonial/gallery tiles use nth-child stagger delays in CSS.
+**Animation system** — IntersectionObserver triggers `.visible` class on scroll. Elements use `.anim-fade`, `.anim-stagger`, `.anim-slide-right`. Proof bar numbers count up via JS (`countUp()`). Video/testimonial tiles use nth-child stagger delays in CSS. Gallery tiles have NO opacity animation — always visible on load (removing it fixed a blank-space bug).
 
 **Video behavior** — `video` tags autoplay muted loop on load. `toggleVideo(card)` on click: first click unmutes + shows native controls, subsequent clicks toggle play/pause.
 
@@ -73,18 +73,24 @@ Iframe height set to `100%` — GHL script auto-resizes via postMessage.
 
 20 photos total, 4-column grid (`gallery-10` class, `repeat(4,1fr)`). Lightbox opens on click.
 
-## Sticky Form — Known Issue
+- Images 1-6, 9-10: remote from `https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/`
+- Images 7-8: local files `IMG_gallery_07.jpg` + `IMG_gallery_08.jpg` (downloaded from turnkeyrenovators.com — remote URLs broke in browser)
+- Images 11-20: local jpegs (IMG_5425, IMG_5434, IMG_5450, IMG_5463, IMG_5464, IMG_5480, IMG_5500, IMG_5487, IMG_5498, IMG_5503)
 
-GHL auto-resizes iframe to 1491px AFTER `window.load` — CSS sticky has zero scroll range, JS fixed approaches fail because hero height capture runs before GHL finishes. Tried 5+ approaches, all failed.
+**Gallery blank-space bug (FIXED 2026-05-25):** Tiles used `opacity:0` + IntersectionObserver animation. Observer only reliably triggered for the first 6 items; items 7-20 stayed invisible but still occupied grid space, creating a huge dark empty area. Fix: removed `opacity:0` entirely from `.social-video-tile` — tiles are always visible on load.
 
-**Root cause:** Need to capture hero height AFTER GHL loads (timing unknown/async).
-**Correct fix:** Add content to hero LEFT column to fill the dead space below bullets and match the form height. Once left col height ~= form height, CSS sticky works naturally.
-**Current state:** 3s-delay JS approach is in the page as latest attempt.
+## Sticky Form (FIXED 2026-05-25)
+
+**What was tried and failed:** JS fixed-position approach with 3s delay — unfixed too early because `leftBottomY` was the left column bottom, not the form bottom.
+
+**What works:** CSS only.
+- `.form-card` — `position: sticky; top: 90px; max-height: calc(100vh - 110px); overflow-y: auto;`
+- `.hero-inner > .anim-fade` (left column) — `position: sticky; top: 90px;`
+- Both columns stick together while user fills out the form. Form scrolls internally (overflow-y) so user can reach all fields.
+- JS sticky block removed entirely.
 
 ## Pending / Resume Next Session
 
-- **Sticky form** — add content to hero left column (testimonial, before/after, guarantee badge) to match ~1491px form height, then switch back to CSS sticky
-- **Hero left column empty space** — same as above; dead space below bullets when GHL form is taller than left content
 - **Local videos 3+4 not playing** — `demo-day-cleveland.mp4` and `bathroom-cleveland.mp4` may be slow from GitHub Pages. Fix: upload to `turnkeyrenovators.com/wp-content/uploads/` and update src URLs
 - **Facebook CAPI:** Pixel ID `987920936622343` — needs server-side CAPI events wired to GHL form submissions and calls
 - **Call tracking:** GHL tracking number (forward to 504-513-6366) to fire FB Lead event on call
