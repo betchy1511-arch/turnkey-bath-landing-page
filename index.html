@@ -629,11 +629,17 @@
     transform: scale(.92);
     transition: opacity .4s ease, transform .4s ease;
   }
-  .social-grid.visible .social-video-tile:nth-child(1) { opacity:1; transform:scale(1); transition-delay:.0s; }
-  .social-grid.visible .social-video-tile:nth-child(2) { opacity:1; transform:scale(1); transition-delay:.08s; }
-  .social-grid.visible .social-video-tile:nth-child(3) { opacity:1; transform:scale(1); transition-delay:.16s; }
-  .social-grid.visible .social-video-tile:nth-child(4) { opacity:1; transform:scale(1); transition-delay:.24s; }
-  .social-grid.visible .social-video-tile:nth-child(5) { opacity:1; transform:scale(1); transition-delay:.32s; }
+  .gallery-10 { grid-template-columns: repeat(5, 1fr); }
+  .social-grid.visible .social-video-tile:nth-child(1)  { opacity:1; transform:scale(1); transition-delay:.00s; }
+  .social-grid.visible .social-video-tile:nth-child(2)  { opacity:1; transform:scale(1); transition-delay:.06s; }
+  .social-grid.visible .social-video-tile:nth-child(3)  { opacity:1; transform:scale(1); transition-delay:.12s; }
+  .social-grid.visible .social-video-tile:nth-child(4)  { opacity:1; transform:scale(1); transition-delay:.18s; }
+  .social-grid.visible .social-video-tile:nth-child(5)  { opacity:1; transform:scale(1); transition-delay:.24s; }
+  .social-grid.visible .social-video-tile:nth-child(6)  { opacity:1; transform:scale(1); transition-delay:.30s; }
+  .social-grid.visible .social-video-tile:nth-child(7)  { opacity:1; transform:scale(1); transition-delay:.36s; }
+  .social-grid.visible .social-video-tile:nth-child(8)  { opacity:1; transform:scale(1); transition-delay:.42s; }
+  .social-grid.visible .social-video-tile:nth-child(9)  { opacity:1; transform:scale(1); transition-delay:.48s; }
+  .social-grid.visible .social-video-tile:nth-child(10) { opacity:1; transform:scale(1); transition-delay:.54s; }
   .social-video-tile img {
     width: 100%; height: 100%;
     object-fit: cover;
@@ -1012,32 +1018,26 @@
     <div class="social-header">
       <div class="social-icon-ig">📸</div>
       <div>
-        <div class="social-handle">@turnkeybathremodel</div>
-        <div class="social-sub">Follow us for before &amp; after reveals</div>
+        <div class="social-handle">Real Project Photos</div>
+        <div class="social-sub">Actual work from Louisiana homeowners — no stock photos</div>
       </div>
+      <a href="https://www.turnkeyrenovators.com/gallery/" target="_blank" rel="noopener"
+         style="margin-left:auto;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--blue);text-decoration:none;">
+        View Full Gallery →
+      </a>
     </div>
 
-    <div class="social-grid">
-      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-1.mp4')">
-        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-image-1-400x250.png" alt="TurnKey bathroom remodel project 1" loading="lazy">
-        <div class="gallery-play-btn">▶</div>
-      </div>
-      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-2.mp4')">
-        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-image-2-400x250.png" alt="TurnKey bathroom remodel project 2" loading="lazy">
-        <div class="gallery-play-btn">▶</div>
-      </div>
-      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-3.mp4')">
-        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-3-400x250.png" alt="TurnKey bathroom remodel project 3" loading="lazy">
-        <div class="gallery-play-btn">▶</div>
-      </div>
-      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-4.mp4')">
-        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/12/gallery-video-image-4-400x250.png" alt="TurnKey bathroom remodel project 4" loading="lazy">
-        <div class="gallery-play-btn">▶</div>
-      </div>
-      <div class="social-video-tile" onclick="playGalleryVideo(this, 'https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/video-1.mp4')">
-        <img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/unnamed-800x450.jpg" alt="TurnKey bathroom remodel project 5" loading="lazy">
-        <div class="gallery-play-btn">▶</div>
-      </div>
+    <div class="social-grid gallery-10">
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7160-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7159-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7176-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5099-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_0956-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7634-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7605-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_5102-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_3221-350x250.png" alt="TurnKey bath remodel project" loading="lazy"></div>
+      <div class="social-video-tile"><img src="https://www.turnkeyrenovators.com/wp-content/uploads/2025/03/IMG_7157-scaled-1-350x250.jpg" alt="TurnKey bath remodel project" loading="lazy"></div>
     </div>
 
   </div>
