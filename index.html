@@ -1411,21 +1411,25 @@
   (function stickyForm() {
     const formCard = document.getElementById('consultation-form');
     const hero     = document.querySelector('.hero');
-    if (!formCard || !hero) return;
+    const heroLeft = hero ? hero.querySelector('.hero-inner > div:first-child') : null;
+    if (!formCard || !hero || !heroLeft) return;
 
     let isFixed = false;
-    let capturedRight, capturedWidth, capturedHeroHeight;
+    let capturedRight, capturedWidth, leftColHeight;
 
     function capture() {
-      const rect      = formCard.getBoundingClientRect();
-      capturedRight   = window.innerWidth - rect.right;
-      capturedWidth   = formCard.offsetWidth;
-      capturedHeroHeight = hero.offsetHeight;
+      const rect    = formCard.getBoundingClientRect();
+      capturedRight = window.innerWidth - rect.right;
+      capturedWidth = formCard.offsetWidth;
+      // Lock hero to left-column height only — NOT the giant iframe height
+      const cs = getComputedStyle(hero);
+      leftColHeight = heroLeft.offsetHeight
+        + parseInt(cs.paddingTop) + parseInt(cs.paddingBottom);
     }
 
     function fix() {
       if (isFixed) return;
-      hero.style.minHeight = capturedHeroHeight + 'px';
+      hero.style.minHeight = leftColHeight + 'px';
       Object.assign(formCard.style, {
         position : 'fixed',
         top      : '90px',
