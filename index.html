@@ -258,10 +258,6 @@
     border-radius: 14px;
     padding: 12px 16px;
     box-shadow: 0 24px 60px rgba(0,0,0,.35);
-    position: sticky;
-    top: 90px;
-    max-height: calc(100vh - 110px);
-    overflow-y: auto;
   }
   .form-card-title {
     font-family: 'Outfit', sans-serif;
@@ -1405,6 +1401,57 @@
   window.openModal = openModal;
   window.closeModal = closeModal;
   window.closeModalOutside = closeModalOutside;
+
+  // === STICKY FORM (JS-based — GHL iframe is 1491px so CSS sticky has no scroll range) ===
+  (function stickyForm() {
+    const formCard = document.getElementById('consultation-form');
+    const hero     = document.querySelector('.hero');
+    if (!formCard || !hero) return;
+
+    let isFixed = false;
+    let capturedRight, capturedWidth, capturedHeroHeight;
+
+    function capture() {
+      const rect      = formCard.getBoundingClientRect();
+      capturedRight   = window.innerWidth - rect.right;
+      capturedWidth   = formCard.offsetWidth;
+      capturedHeroHeight = hero.offsetHeight;
+    }
+
+    function fix() {
+      if (isFixed) return;
+      hero.style.minHeight = capturedHeroHeight + 'px';
+      Object.assign(formCard.style, {
+        position : 'fixed',
+        top      : '90px',
+        right    : capturedRight + 'px',
+        width    : capturedWidth + 'px',
+        maxHeight: 'calc(100vh - 110px)',
+        overflowY: 'auto',
+        zIndex   : '50'
+      });
+      isFixed = true;
+    }
+
+    function unfix() {
+      if (!isFixed) return;
+      ['position','top','right','width','maxHeight','overflowY','zIndex'].forEach(p => formCard.style[p] = '');
+      hero.style.minHeight = '';
+      isFixed = false;
+    }
+
+    function update() {
+      if (window.innerWidth < 769) { unfix(); return; }
+      const r = hero.getBoundingClientRect();
+      (r.top < 90 && r.bottom > 90) ? fix() : unfix();
+    }
+
+    window.addEventListener('load', function () {
+      capture();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', function () { unfix(); capture(); });
+    });
+  })();
 </script>
 
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
