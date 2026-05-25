@@ -258,6 +258,10 @@
     border-radius: 14px;
     padding: 12px 16px;
     box-shadow: 0 24px 60px rgba(0,0,0,.35);
+    position: sticky;
+    top: 90px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
   }
   .form-card-title {
     font-family: 'Outfit', sans-serif;
@@ -1410,63 +1414,7 @@
   window.closeModalOutside = closeModalOutside;
 
   // === STICKY FORM ===
-  // Problem: GHL resizes iframe to 1491px AFTER window.load fires.
-  // Solution: delay capture 3s so GHL finishes, then use absolute scroll coords.
-  window.addEventListener('load', function () {
-    setTimeout(function () {
-      var form     = document.getElementById('consultation-form');
-      var hero     = document.querySelector('.hero');
-      var heroLeft = document.querySelector('.hero-inner > div:first-child');
-      if (!form || !hero || !heroLeft) return;
-      if (window.innerWidth < 769) return;
-
-      // Snapshot absolute document positions AFTER GHL has loaded
-      var sy0          = window.scrollY;
-      var formRect     = form.getBoundingClientRect();
-      var fixedRight   = window.innerWidth - formRect.right;
-      var fixedWidth   = form.offsetWidth;
-      var heroHeight   = hero.offsetHeight;                          // real height including GHL iframe
-      var leftBottomY  = heroLeft.getBoundingClientRect().bottom + sy0; // abs Y where left col ends
-
-      // Lock hero so proof bar doesn't jump when form goes fixed
-      hero.style.minHeight = heroHeight + 'px';
-
-      var isFixed = false;
-
-      function fix() {
-        if (isFixed) return;
-        form.style.position  = 'fixed';
-        form.style.top       = '90px';
-        form.style.right     = fixedRight + 'px';
-        form.style.width     = fixedWidth + 'px';
-        form.style.maxHeight = 'calc(100vh - 110px)';
-        form.style.overflowY = 'auto';
-        form.style.zIndex    = '50';
-        isFixed = true;
-      }
-
-      function unfix() {
-        if (!isFixed) return;
-        form.style.position  = '';
-        form.style.top       = '';
-        form.style.right     = '';
-        form.style.width     = '';
-        form.style.maxHeight = '';
-        form.style.overflowY = '';
-        form.style.zIndex    = '';
-        isFixed = false;
-      }
-
-      function update() {
-        var sy   = window.scrollY;
-        var navH = 90;
-        // Fix while hero has scrolled past nav AND left col hasn't fully exited viewport
-        if (sy + navH > 0 && sy < leftBottomY) { fix(); } else { unfix(); }
-      }
-
-      window.addEventListener('scroll', update, { passive: true });
-    }, 3000);
-  });
+  // Handled entirely by CSS: position:sticky + top:90px + max-height + overflow-y:auto on .form-card
 </script>
 
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
