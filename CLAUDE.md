@@ -21,14 +21,20 @@ Single file: `index.html`. All CSS is in `<style>`, all JS in a `<script>` at th
 **Page sections (top to bottom):**
 1. Sticky nav — logo (left) + trust strip center (stars + rating) + license badges + phone + "Get a Free Consultation" button (right)
 2. Hero — headline + bullet list (left) + GHL Banner Form iframe (right)
+   - Left column contains: badge, H1, subhead, 3 bullets, featured pull-quote (Robert White), 3 credibility badges
+   - Bullets: FREE consultation ($250 value), Fixed-Price Quotes, Licensed & Insured — DO NOT add 0% Financing or 25+ Years (redundant with badges/proof bar)
+   - Pull-quote: Robert White, New Orleans LA, Google Review
+   - Cred badges: Lifetime Warranty, LA Licensed & Insured, 0% Financing — white bg + navy text so they pop off the dark hero
 3. Proof bar — 4 stats: 500+, 25+ years, 4.9★, 1 Day
 4. Video section — 2x2 grid, dark gray bg, centered heading, autoplay muted, click to unmute
-5. Testimonials — 6 real customer cards (3-column grid)
-6. Gallery — 10 real project photos (5x2 grid), dark navy bg, lightbox on click
-7. Bottom CTA — photo background + gradient overlay, book + call buttons
-8. Footer — address, hours, phone, terms link
-9. Sticky mobile bar — call + form buttons (mobile only)
-10. Popup modal — opens from nav "Get a Free Consultation" button, contains GHL Popup Form iframe
+5. Services strip — 4-card grid, dark navy bg, blue-tinted borders, between video and testimonials sections
+   - Cards: Shower Replacement, Tub-to-Shower Conversion, Walk-In & Safety Showers, Tub Liners & Surrounds
+6. Testimonials — 6 real customer cards (3-column grid)
+7. Gallery — 20 real project photos (4-column grid), dark navy bg, lightbox on click
+8. Bottom CTA — photo background + gradient overlay, book + call buttons
+9. Footer — address, hours, phone, terms link
+10. Sticky mobile bar — call + form buttons (mobile only)
+11. Popup modal — opens from nav "Get a Free Consultation" button, contains GHL Popup Form iframe
 
 **Animation system** — IntersectionObserver triggers `.visible` class on scroll. Elements use `.anim-fade`, `.anim-stagger`, `.anim-slide-right`. Proof bar numbers count up via JS (`countUp()`). Video/testimonial tiles use nth-child stagger delays in CSS. Gallery tiles have NO opacity animation — always visible on load (removing it fixed a blank-space bug).
 
@@ -88,6 +94,15 @@ Iframe height set to `100%` — GHL script auto-resizes via postMessage.
 - `.hero-inner > .anim-fade` (left column) — `position: sticky; top: 90px;`
 - Both columns stick together while user fills out the form. Form scrolls internally (overflow-y) so user can reach all fields.
 - JS sticky block removed entirely.
+
+## Dead Space Fix (2026-05-27)
+
+Hero left column had unused space below bullets caused by the tall GHL form (data-height 1491px). Fixed by adding:
+1. Featured pull-quote (Robert White, Google Review) — dark card style matching hero
+2. Credibility badge strip (Lifetime Warranty, LA Licensed & Insured, 0% Financing) — **white bg + navy text**, NOT blue-on-navy (blends in)
+3. Services strip moved OUT of hero and INTO a dedicated section between video + testimonials — dark navy bg, blue-tinted card borders
+
+**GitHub Pages cache note:** Changes can take 60-90s to go live. If content still shows after a push, force-redeploy with `git commit --allow-empty -m "Force redeploy" && git push`. Verify with `curl -s https://betchy1511-arch.github.io/turnkey-bath-landing-page/ | grep "text to check"`.
 
 ## Pending / Resume Next Session
 
